@@ -1,4 +1,4 @@
-const { Queue } = require("../estructuras")
+const { Queue } = require("../estructuras");
 // Implementar la función controlAcces: a partir de una Queue que va a recibir como paráemtro que tiene
 // en cada posición un objeto que va a representar a una persona y tiene la siguiente forma:
 // {
@@ -15,16 +15,26 @@ const { Queue } = require("../estructuras")
 // - Tener un ticket que corresponda con el evento (prop event de ticket)
 // - Que no haya ingresado ya otra persona al evento con ese mismo número de ticket
 // Finalmente la función debe devolver un arreglo con todos los nombres de las personas que pudieron ingresar
-// Importante!: Aquellas personas que no cumplan con los requisitos para ingresar deben ser removidos de la cola 
+// Importante!: Aquellas personas que no cumplan con los requisitos para ingresar deben ser removidos de la cola
 
-var controlAcces = function(queue, event){
-    // Tu código aca:
-    
-  };
-      
-  
+var controlAcces = function (queue, event) {
+  // Tu código aca:
+  let arr = [];
+  let numbers = [];
+  while (queue.array.length > 0) {
+    let current = queue.dequeue();
+    if (
+      current.age >= 18 &&
+      current.ticket.event === event &&
+      !numbers.includes(current.ticket.number)
+    ) {
+      arr.push(current.fullname);
+      numbers.push(current.ticket.number);
+    }
+  }
+  return arr;
+};
 
-  module.exports = {
-    controlAcces,
-   
-}
+module.exports = {
+  controlAcces,
+};
